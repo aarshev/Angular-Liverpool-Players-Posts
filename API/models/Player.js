@@ -14,6 +14,7 @@ const playerSchema = new Schema({
         }
     }
     , votes : { type: [ObjectId], ref: 'User', default: [] }
+    , posts : { type: [ObjectId], ref: 'Post', default: []}
 });
 
 const Player = model('Player', playerSchema);

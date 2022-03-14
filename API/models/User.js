@@ -12,7 +12,7 @@ const userSchema = new Schema({
         }
     }, 
     hashedPassword : { type: String, required: true},
-    posts : { type: [ObjectId], ref: 'Post', default: []},
+    posts : { type: [ObjectId], ref: 'Post', default: []}
 });
 
 //for unique email

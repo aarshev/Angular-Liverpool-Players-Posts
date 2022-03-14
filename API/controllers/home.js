@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const Player = require('../models/Player');
 const { getAllPlayers } = requier('../services/player')
  
 
