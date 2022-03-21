@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getAllPlayers } = requier('../services/player')
+const { getAllPlayers } = require('../services/player')
  
 
 const router = Router();

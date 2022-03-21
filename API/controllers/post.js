@@ -5,7 +5,7 @@ const { getAllPosts, createPost, getPostById, updatePost, deletePost } = require
 const router = Router();
 
 router.get('/posts', async (req, res) => {
-    const posts = await getAllPosts;
+    const posts = await getAllPosts();
     try{
         res.status(200).json(posts)
     }catch(err){
