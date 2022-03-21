@@ -1,1 +1,7 @@
-<p>players-list works!</p>
+<div class="team-player-list" *ngIf="playerList">
+    <app-players-list-item *ngFor="let player of playerList" [player]="player"></app-players-list-item>
+    <div *ngIf="playerList.length === 0">No Themes!</div>
+  </div>
+  <div *ngIf="!playerList">
+    Loading...
+  </div>

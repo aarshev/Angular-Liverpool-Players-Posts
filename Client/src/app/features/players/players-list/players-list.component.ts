@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PlayerService } from 'src/app/core/player.service';
+import { IPlayer } from '../../../core/interfaces';
 
 @Component({
   selector: 'app-players-list',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayersListComponent implements OnInit {
 
-  constructor() { }
+  playerList!: IPlayer[]
+
+  constructor(private playerService: PlayerService) { 
+    this.playerService.loadPlayersList().subscribe(playerList => {
+      this.playerList = playerList;
+    });
+  }
 
   ngOnInit(): void {
   }

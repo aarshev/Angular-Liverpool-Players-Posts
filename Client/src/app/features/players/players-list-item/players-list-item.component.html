@@ -1,1 +1,22 @@
-<p>players-list-item works!</p>
+<div class="team-player-list-item">
+    <div class="img-wrap">
+        <img src={{player.playerImage}} alt={{player.playerName}}>
+    </div>
+    <div class="number">
+        {{player.shirtNumber}}
+        ::after
+    </div>
+    <div class="about">
+        <div class="name">
+            <span>{{player.playerName}}</span>
+        </div>
+        <div class="position">
+            <span>{{player.position}}</span>
+        </div>
+    </div>
+    <a href="/posts/:id">
+        <i class="fas fa-sign-in-alt"></i>
+        Read Posts
+    </a>
+
+</div>

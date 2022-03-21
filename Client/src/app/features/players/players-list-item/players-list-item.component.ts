@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IPlayer } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-players-list-item',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class PlayersListItemComponent implements OnInit {
 
   constructor() { }
+
+  @Input() player!: IPlayer;
 
   ngOnInit(): void {
   }

@@ -1,0 +1,77 @@
+.team-player-list-item .img-wrap {
+    float: left;
+    height: 200px;
+    width: 200px;
+}
+
+.team-player-list-item {
+    background-color: #f7f7f7;
+    float: left;
+    margin: 8px;
+    width: 500px;
+    height: 200px;
+}
+
+.team-player-list-item .number {
+    background-color: #e31b23;
+    color: #fff;
+    float: left;
+    font-size: 18px;
+    height: 200px;
+    line-height: 200px;
+    position: relative;
+    text-align: center;
+    width: 30px;
+    -webkit-transition: width .3s 0s;
+    -o-transition: width .3s 0s;
+    -moz-transition: width .3s 0s;
+    transition: width .3s 0s;
+}
+
+.team-player-list-item .number:after {
+    right: -10px;
+    border-left: 10px solid #e31b23;
+    border-bottom: 10px solid transparent;
+    border-top: 10px solid transparent;
+    content: "";
+    display: inline-block;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    width: 0;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.team-player-list-item .about {
+    float: left;
+    margin-left: 20px;
+}
+
+.team-player-list-item .name {
+    margin-top: 15px;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.team-player-list-item .position {
+    margin-top: 15px;
+    color: #333;
+    font-size: 14px;
+}
+
+.team-player-list-item a {
+    color: white;
+    text-decoration: none;
+    background-color: #DC0714;
+    border: none;
+    border-radius: 0.3em;
+    padding: 0.5em 5.2em;
+    margin: 1em;
+    display: inline-block;
+    margin-top: 85px;
+}
