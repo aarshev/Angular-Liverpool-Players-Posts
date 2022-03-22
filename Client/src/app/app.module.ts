@@ -10,6 +10,7 @@ import { PagesModule } from './features/pages/pages.module';
 import { PlayersModule } from './features/players/players.module';
 import { AppRoutingModule } from './app-routing.module';
 import { PostsModule } from './features/posts/posts.module';
+import { AuthModule } from './auth/auth.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -22,7 +23,8 @@ import { PostsModule } from './features/posts/posts.module';
     AppRoutingModule,
     PagesModule,
     PlayersModule,
-    PostsModule
+    PostsModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
