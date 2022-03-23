@@ -11,6 +11,7 @@ import { PlayersModule } from './features/players/players.module';
 import { AppRoutingModule } from './app-routing.module';
 import { PostsModule } from './features/posts/posts.module';
 import { AuthModule } from './auth/auth.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent
@@ -24,7 +25,8 @@ import { AuthModule } from './auth/auth.module';
     PagesModule,
     PlayersModule,
     PostsModule,
-    AuthModule
+    AuthModule,
+    NoopAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
