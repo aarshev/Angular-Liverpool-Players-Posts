@@ -1,51 +1,88 @@
 const { Router } = require('express');
-const { register, login } = require('../services/user');
 
 const router = Router();
+const Token  = require('../models/TokenBlackList');
+const userModel = require('../models/User')
+const utils = require('../utils');
 
+const authCookieName = 'auth-cookie';
+const bsonToJson = (data) => { return JSON.parse(JSON.stringify(data)) };
+const removePassword = (data) => {
+    const { password, __v, ...userData } = data;
+    return userData
+}
 
 router.post('/register' , async (req, res, next) => {
-    try{
-        if(req.body.password < 4){
-            throw new Error('Password must be at least 4 symbols');
-        }
+    const {  email,  password, repeatPassword } = req.body;
 
-        if(req.body.password.trim() == ''){
-            throw new Error('Password is required');
-        }
-        if(req.body.password != req.body.repass){
-            throw new Error('Passwords dont match');
-        }
-        const user = await register(req.body.email, req.body.password, res);
-        //todo add JWT session
-        res.status(200).send(user);
-    }catch(err){
-        if (err.name === 'MongoError' && err.code === 11000) {
-            let field = err.message.split("index: ")[1];
-            field = field.split(" dup key")[0];
-            field = field.substring(0, field.lastIndexOf("_"));
+    return userModel.create({  email, password })
+        .then((createdUser) => {
+            createdUser = bsonToJson(createdUser);
+            createdUser = removePassword(createdUser);
 
-            res.status(409)
-                .send({ message: `This ${field} is already registered!` });
-            return;
-        }
-        next(err);
-    }
+            const token = utils.jwt.createToken({ id: createdUser._id });
+            if (process.env.NODE_ENV === 'production') {
+                res.cookie(authCookieName, token, { httpOnly: true, sameSite: 'none', secure: true })
+            } else {
+                res.cookie(authCookieName, token, { httpOnly: true })
+            }
+            res.status(200)
+                .send(createdUser);
+        })
+        .catch(err => {
+            if (err.name === 'MongoError' && err.code === 11000) {
+                let field = err.message.split("index: ")[1];
+                field = field.split(" dup key")[0];
+                field = field.substring(0, field.lastIndexOf("_"));
+
+                res.status(409)
+                    .send({ message: `This ${field} is already registered!` });
+                return;
+            }
+            next(err);
+        });
 });
 
 
 router.post('/login' , async (req, res) => {
-    try{
-        const user = await login(req.body.email, req.body.password, res);
-        //todo add JWT session
-        res.status(200).send(user);
-    }catch(err){
-        next(err);
-    }
+    const { email, password } = req.body;
+
+    userModel.findOne({ email })
+        .then(user => {
+            return Promise.all([user, user ? user.matchPassword(password) : false]);
+        })
+        .then(([user, match]) => {
+            if (!match) {
+                res.status(401)
+                    .send({ message: 'Wrong email or password' });
+                return
+            }
+            user = bsonToJson(user);
+            user = removePassword(user);
+
+            const token = utils.jwt.createToken({ id: user._id });
+
+            if (process.env.NODE_ENV === 'production') {
+                res.cookie(authCookieName, token, { httpOnly: true, sameSite: 'none', secure: true })
+            } else {
+                res.cookie(authCookieName, token, { httpOnly: true })
+            }
+            res.status(200)
+                .send(user);
+        })
+        .catch(next);
 });
 
 router.post('/logout', async (req, res) => {
-    //todo add logout logic
+    const token = req.cookies[authCookieName];
+
+    Token.create({ token })
+        .then(() => {
+            res.clearCookie(authCookieName)
+                .status(204)
+                .send({ message: 'Logged out!' });
+        })
+        .catch(err => res.send(err));
 });
 
 
