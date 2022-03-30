@@ -13,7 +13,8 @@ const removePassword = (data) => {
 }
 
 router.post('/register' , async (req, res, next) => {
-    const {  email,  password, repeatPassword } = req.body;
+    const {  email,  password } = req.body;
+    console.log(email, password);
 
     return userModel.create({  email, password })
         .then((createdUser) => {
@@ -44,7 +45,7 @@ router.post('/register' , async (req, res, next) => {
 });
 
 
-router.post('/login' , async (req, res) => {
+router.post('/login' , async (req, res, next) => {
     const { email, password } = req.body;
 
     userModel.findOne({ email })

@@ -2,21 +2,21 @@
     <div class="header-background">
         <span>Create Post</span>
     </div>
-    <form>
+    <form  #newPostForm="ngForm" (ngSubmit)="submitNewPost(newPostForm)">
         <div class="new-theme-title">
-            <label for="themeName">Player  <span class="red"></span></label>
-            <select>
+            <label for="playerName">Player  <span class="red"></span></label>
+            <select #playerName="ngModel" ngModel name="playerName" id="playerName">
                 <option value="" disabled selected>Select a player</option>
                 <option *ngFor="let player of playerListNames" value="{{player.value}}">{{player.value}}</option>
             </select>
         </div>
         <div class="new-theme-content">
             <label for="postContent">Post <span class="red"></span></label>
-            <textarea type="text" name="postContent" id="postContent" rows="8" class="height"></textarea>
+            <textarea #postText="ngModel" ngModel type="text" name="postContent" id="postContent" rows="8" class="height"></textarea>
         </div>
         <div class="new-theme-buttons">
-            <button class="cancel">Cancel</button>
-            <button class="public">Post</button>
+            <button type="button" (click)="navigateToHome()" class="cancel">Cancel</button>
+            <button [disabled]="newPostForm.invalid" class="public">Post</button>
         </div>
 
     </form>

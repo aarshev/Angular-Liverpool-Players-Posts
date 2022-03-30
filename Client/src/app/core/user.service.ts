@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IUser } from './interfaces';
 
@@ -16,6 +17,14 @@ export class UserService {
 
   get isLogged() {
     return !!this.currentUser;
+  }
+
+  login$(userData: { email: string, password: string }){
+    return this.httpClient
+      .post<IUser>(`${environment.apiUrl}/login`, userData, { withCredentials: true})
+      .pipe( 
+        tap((user) => this.currentUser = user)
+      )
   }
 
   constructor(private httpClient: HttpClient) { }

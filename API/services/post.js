@@ -21,7 +21,7 @@ async function createPost(post){
 
     await user.save();
 
-    const player = await Player.findById(result.playerName);
+    const player = await Player.findOne({playerName: result.playerName});
     player.posts.push(result._id);
 
     await player.save();
@@ -34,10 +34,8 @@ async function updatePost(id, post){
     const existing = await Post.findById(id);
 
 
-    existing.playerName = psot.playerName;
+    existing.playerName = post.playerName;
     existing.postContent  = post.postContent;
-    existing.date  = post.date;
-    existing.time  = post.time;
 
     await existing.save();
 }

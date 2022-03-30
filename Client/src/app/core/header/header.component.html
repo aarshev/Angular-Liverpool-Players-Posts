@@ -14,12 +14,12 @@
           <li>
             <a routerLink="/posts">Posts</a>
           </li>
-          <li>
+          <li *ngIf="isLogged">
             <a routerLink="/posts/create">New Post</a>
           </li>
         </ul>
       </nav>
-      <div class="mini-navbar" >
+      <div class="mini-navbar" *ngIf="!isLogged">
         <ul>
           <li>
             <a routerLink="/login">Login</a>
@@ -29,10 +29,10 @@
           </li>
         </ul>
       </div>
-      <div class="mini-navbar" >
+      <div class="mini-navbar" *ngIf="isLogged">
         <ul>
           <li>
-            <a routerLink="/profile">John's Profile</a>
+            <a routerLink="/profile">{{currentUser.email}}</a>
           </li>
           <li>
             <a href="#">Logout</a>

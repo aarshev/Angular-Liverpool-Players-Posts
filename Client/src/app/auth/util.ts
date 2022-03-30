@@ -3,9 +3,6 @@ import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from "@angu
 export function emailValidator(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
 
-    // if (control.errors && Object.keys(control.errors).filter(errorName => errorName !== 'email').length > 0) {
-    //     return null;
-    // }
 
     if (!value) {
         return null
