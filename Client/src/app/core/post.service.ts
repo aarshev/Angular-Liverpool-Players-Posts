@@ -20,4 +20,8 @@ export class PostService {
   loadPostList(): Observable<IPost[]> {
     return this.http.get<IPost[]>(`${apiURL}/posts`);
   }
+
+  loadPostById(id: string): Observable<IPost[]> {
+    return this.http.get<IPost[]>(`${apiURL}/posts/${id}`);
+  }
 }

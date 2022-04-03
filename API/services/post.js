@@ -12,6 +12,15 @@ async function getPostById(id){
 }
 
 
+async function getAllPostsForPlayer(playerId){
+    const player = await Player.findById(playerId);
+    const posts = [];
+    for(let postId of player.posts){
+        posts.push(await getPostById(postId))
+    }
+    return posts;
+}
+
 async function createPost(post){
     const result = new Post(post);
     await result.save();
@@ -52,5 +61,6 @@ module.exports = {
     getPostById,
     createPost,
     updatePost,
-    deletePost
+    deletePost,
+    getAllPostsForPlayer
 }

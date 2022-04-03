@@ -1,11 +1,11 @@
 const { Router } = require('express');
-const { getAllPosts, createPost, getPostById, updatePost, deletePost } = require('../services/post');
+const { getAllPosts, createPost, getPostById, updatePost, deletePost, getAllPostsForPlayer } = require('../services/post');
 const { auth } = require('../utils');
 
 
 const router = Router();
 
-router.get('/posts', async (req, res) => {
+router.get('/posts', async (req, res, next) => {
     const posts = await getAllPosts();
     try{
         res.status(200).json(posts)
@@ -13,6 +13,18 @@ router.get('/posts', async (req, res) => {
         next(err);
     }
 });
+
+router.get('/posts/:id', async (req, res, next) => {
+    const playerId = req.params.id
+    const posts = await getAllPostsForPlayer(playerId);
+    console.log(posts)
+    try{
+        res.status(200).json(posts)
+    }catch(err){
+        next(err);
+    }
+});
+
 
 router.post('/create', auth() , async (req, res, next) => {
    const { _id: userId } = req.user; //todo get id after you make the jwt

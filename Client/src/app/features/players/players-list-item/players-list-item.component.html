@@ -14,7 +14,7 @@
             <span>{{player.position}}</span>
         </div>
     </div>
-    <a href="/posts/:id">
+    <a [routerLink]="['/posts', player._id]">
         <i class="fas fa-sign-in-alt"></i>
         Read Posts
     </a>
