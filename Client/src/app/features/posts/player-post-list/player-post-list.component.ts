@@ -18,7 +18,7 @@ export class PlayerPostListComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       console.log(params)
       const playerId = params['id'];
-      this.postService.loadPostById(playerId).subscribe(postList => {
+      this.postService.loadPostByPlayerId(playerId).subscribe(postList => {
         this.postList = postList;
         console.log(this.postList)
       })

@@ -1,8 +1,21 @@
 .theme-container a {
+    color: white;
     text-decoration: none;
-    color: inherit;
-  }
+    border: none;
+    border-radius: 0.3em;
+    padding: 0.5em 5.2em;
+    margin: 1em;
+    display: inline-block;
+}
 
+.edit{
+  background-color: orange;
+}
+
+.delete{
+  background-color: darkred;
+  cursor: pointer;
+}
   
   .theme-container span {
     font-weight: bold;

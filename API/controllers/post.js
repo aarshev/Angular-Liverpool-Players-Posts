@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getAllPosts, createPost, getPostById, updatePost, deletePost, getAllPostsForPlayer } = require('../services/post');
+const { getAllPosts, createPost, getPostById, getAllPostsForPlayer, updatePost, deletePost } = require('../services/post');
 const { auth } = require('../utils');
 
 
@@ -41,6 +41,16 @@ router.post('/create', auth() , async (req, res, next) => {
         next(err)
     }
 });
+
+router.get('/edit/:id', async (req, res, next) => {
+    const id = req.params.id;
+    const post = await getPostById(id);
+    try{
+        res.status(200).json(post)
+    }catch(err){
+        next(err);
+    }
+});
 //todo add guards to delete update and create
 router.post('/edit/:id' , async (req, res, next) => {
     const id = req.params.id;
@@ -52,7 +62,7 @@ router.post('/edit/:id' , async (req, res, next) => {
     }
     
     try{
-        const updatePost = await updatePost(id, post);
+        const updatedPost = await updatePost(id, post);
         res.status(200).json(updatedPost);
     }catch(err){
        next(err);
@@ -60,13 +70,11 @@ router.post('/edit/:id' , async (req, res, next) => {
 });
 
 
-router.post('/delete/:id', async(req, res, next) => {
+router.delete('/delete/:id', async(req, res, next) => {
     const id= req.params.id;
-    const existing = await getPostById(id);
-    
     try{
-        const deletePost = await deletePost(id);
-        res.status(200).json(deletePost);
+        const deletedPost = await deletePost(id);
+        res.status(200).json(deletedPost);
     }catch(err){
        next(err)
     }

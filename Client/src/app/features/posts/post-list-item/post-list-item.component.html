@@ -3,6 +3,16 @@
       <div class="theme-name">
         <h2>{{post.postContent}}</h2>
         <div class="columns">
+          <div class="buttons" *ngIf="userID == post.author">
+            <a class="edit" [routerLink]="['/update', post._id]">
+              <i class="fas fa-sign-in-alt"></i>
+              Udpate
+            </a>
+            <a class="delete" (click)="deleteHandler(post._id)">
+              <i class="fas fa-sign-in-alt"></i>
+              Delete
+            </a>
+          </div>
           <div>
             <p>Date: <time>{{post.created_at}}</time></p>
             <div class="nick-name">

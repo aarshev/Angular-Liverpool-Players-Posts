@@ -1,0 +1,22 @@
+<div class="new-theme-border">
+    <div class="header-background">
+        <span>Update Post</span>
+    </div>
+    <form [formGroup]="editProfileForm" >
+        <div class="new-theme-title">
+            <label for="playerName">Player  <span class="red"></span></label>
+            <select formControlName="playerName"  name="playerName" id="playerName">
+                <option *ngFor="let player of playerListNames" [value]="player.value">{{player.value}}</option>
+            </select>
+        </div>
+        <div class="new-theme-content">
+            <label for="postContent">Post <span class="red"></span></label>
+            <textarea formControlName="postContent" type="text" name="postContent" id="postContent" rows="8" class="height"></textarea>
+        </div>
+        <div class="new-theme-buttons">
+            <button [disabled]="editProfileForm.invalid" class="public">Post</button>
+            <button type="button" (click)="navigateToHome()" class="cancel">Cancel</button>
+        </div>
+
+    </form>
+</div>

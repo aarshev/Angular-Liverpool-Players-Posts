@@ -19,6 +19,7 @@ export class UserService {
     return !!this.currentUser;
   }
 
+
   login$(userData: { email: string, password: string }){
     return this.httpClient
       .post<IUser>(`${environment.apiUrl}/login`, userData, { withCredentials: true})
@@ -31,5 +32,14 @@ export class UserService {
 
   register$(userData: CreateUserDto): Observable<IUser> {
     return this.httpClient.post<IUser>(`${environment.apiUrl}/register`, userData, { withCredentials: true })
+    .pipe( 
+      tap((user) => this.currentUser = user)
+    )
+  }
+
+  logout$(): Observable<IUser> {
+    return this.httpClient
+      .post<IUser>(`${environment.apiUrl}/logout`, {}, { withCredentials: true })
+      .pipe(tap((user) => this.currentUser = user))
   }
 }
