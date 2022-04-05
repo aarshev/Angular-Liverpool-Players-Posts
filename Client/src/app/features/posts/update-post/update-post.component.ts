@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { delay } from 'rxjs';
 import { IPost } from 'src/app/core/interfaces';
 import { PlayerService } from 'src/app/core/player.service';
 import { PostService } from 'src/app/core/post.service';
@@ -14,7 +15,7 @@ export class UpdatePostComponent implements OnInit {
 
   //@ViewChild('editProfileForm') editProfileForm!: NgForm;
 
-  postList!: IPost[];
+  postList!: IPost;
 
   editProfileForm: FormGroup = this.formBuilder.group({
     playerName: new FormControl(''),
@@ -27,7 +28,8 @@ export class UpdatePostComponent implements OnInit {
       this.postService.loadPostById(postId).subscribe(data => {
         this.postList = data; 
         console.log(this.editProfileForm)
-        this.editProfileForm.get("playerName")!.setValue(this.postList[0].playerName)
+        console.log(this.postList.playerName)
+        this.editProfileForm.get("playerName")!.setValue(this.postList["playerName"])
       })
     });
   }

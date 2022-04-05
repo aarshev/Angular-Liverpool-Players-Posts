@@ -25,8 +25,8 @@ export class PostService {
     return this.http.get<IPost[]>(`${apiURL}/posts/${id}`);
   }
 
-  loadPostById(id: string): Observable<IPost[]> {
-    return this.http.get<IPost[]>(`${apiURL}/edit/${id}`);
+  loadPostById(id: string): Observable<IPost> {
+    return this.http.get<IPost>(`${apiURL}/edit/${id}`);
   }
 
   deletePostById(id: string): Observable<void>{

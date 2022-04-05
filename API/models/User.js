@@ -2,7 +2,7 @@ const {Schema, model, Types: { ObjectId }} = require('mongoose');
 const bcrypt = require('bcrypt');
 const saltRounds = Number(process.env.SALTROUNDS) || 5;
 
-const EMAIL_PATTERN = /^([a-zA-Z]+)@([a-zA-Z]+)\.([a-zA-Z]+)$/
+const EMAIL_PATTERN = /.{6,}@([a-zA-Z]+)\.([a-zA-Z]+)$/
 
 const userSchema = new Schema({
     email: {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IUser } from '../interfaces';
+import { MessageBusService, MessageType } from '../message-bus.service';
 import { UserService } from '../user.service';
 
 @Component({
@@ -12,6 +14,11 @@ export class HeaderComponent implements OnInit {
 
   private isLoggingOut: boolean = false;
 
+  subscription!: Subscription;
+
+  message!: string;
+  isMessageError!: boolean;
+
   get isLogged(): boolean {
     return this.userService.isLogged;
   }
@@ -21,12 +28,22 @@ export class HeaderComponent implements OnInit {
     return this.userService.currentUser;
   }
 
-  constructor(public userService: UserService, private router: Router) {
+  constructor(public userService: UserService, private router: Router, private messageBus: MessageBusService) {
 
   }
   ngOnInit(): void {
-  }
+    this.subscription = this.messageBus.onNewMessage$.subscribe(newMessage => {
+      console.log('onNewMessage$.subscribe', newMessage);
+      this.message = newMessage?.text || '';
+      this.isMessageError = newMessage?.type === MessageType.Error;
 
+      if (this.message) {
+        setTimeout(() => {
+          this.messageBus.clear();
+        }, 2000);
+      }
+    });
+  }
 
 
   logoutHandler(): void {
@@ -35,7 +52,7 @@ export class HeaderComponent implements OnInit {
     }
 
     this.isLoggingOut = true;
-    console.log('logout called');
+    //console.log('logout called');
 
     this.userService.logout$().subscribe({
       next: args => {

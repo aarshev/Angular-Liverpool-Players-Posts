@@ -8,21 +8,20 @@ import { UpdatePostComponent } from "./update-post/update-post.component";
 
 const routes: Routes = [
     {
-        path: 'posts',
+        path: '',
         pathMatch: 'full',
         component: PostListComponent
     },{
-        path: 'posts/create',
+        path: 'create',
         canActivate: [AuthGuard],
-        pathMatch: 'full',
         component: CreatePostComponent
-    },{
-        path: 'posts/:id',
-        component: PlayerPostListComponent
     },{
         path: 'update/:id',
         canActivate: [AuthGuard],
         component: UpdatePostComponent
+    },{
+        path: ':id',
+        component: PlayerPostListComponent
     }
 ];
 

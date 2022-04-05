@@ -32,11 +32,11 @@ export class LoginComponent implements OnInit {
     console.log('form is submitted', this.loginFormGroup);
     this.userService.login$(this.loginFormGroup.value).subscribe({
       next: user => {
-        console.log(user);
+        //console.log(user);
         this.router.navigate(['/home']);
       },
       complete: () => {
-        console.log('login stream completed')
+        //console.log('login stream completed')
       },
       error: (err) => {
         this.errorMessage = err.error.message;

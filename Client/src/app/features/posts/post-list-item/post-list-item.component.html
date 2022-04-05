@@ -4,7 +4,7 @@
         <h2>{{post.postContent}}</h2>
         <div class="columns">
           <div class="buttons" *ngIf="userID == post.author">
-            <a class="edit" [routerLink]="['/update', post._id]">
+            <a class="edit" [routerLink]="['/posts/update', post._id]">
               <i class="fas fa-sign-in-alt"></i>
               Udpate
             </a>
@@ -14,10 +14,10 @@
             </a>
           </div>
           <div>
-            <p>Date: <time>{{post.created_at}}</time></p>
             <div class="nick-name">
               <p>Player name: <span>{{post.playerName}}</span></p>
             </div>
+            <p>Date: <time>{{post.created_at | date: 'medium'}}</time></p>
           </div>
         </div>
       </div>

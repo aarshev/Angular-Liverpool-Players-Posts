@@ -21,14 +21,14 @@ export class CreatePostComponent implements OnInit {
   }
 
   submitNewPost(newPostForm: NgForm): void {
-    console.log(newPostForm.value);
+    //console.log(newPostForm.value);
     this.postService.addPost$(newPostForm.value).subscribe({
       next: (post) => {
         console.log(post);
         this.router.navigate(['/home']);
       },
       error: (error) => {
-        console.error(error);
+        //console.error(error);
       }
     })
   }

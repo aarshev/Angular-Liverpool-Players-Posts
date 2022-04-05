@@ -6,7 +6,7 @@ function auth(redirectUnauthenticated = true) {
 
     return function (req, res, next) {
         const token = req.cookies[authCookieName] || '';
-        Promise.all([
+            Promise.all([
             jwt.verifyToken(token),
             Token.findOne({ token })
         ])
@@ -35,6 +35,7 @@ function auth(redirectUnauthenticated = true) {
                 }
                 next(err);
             });
+        
     }
 }
 

@@ -25,7 +25,6 @@ export class PostListItemComponent implements OnInit {
     if(this.userService.currentUser){
       this.userID = this.userService.currentUser._id;
     }
-    console.log(this.userID)
   }
 
   deleteHandler(postID: string): void {

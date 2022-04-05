@@ -22,10 +22,10 @@
       <div class="mini-navbar" *ngIf="!isLogged">
         <ul>
           <li>
-            <a routerLink="/login">Login</a>
+            <a routerLink="/user/login">Login</a>
           </li>
           <li>
-            <a routerLink="/register">Register</a>
+            <a routerLink="/user/register">Register</a>
           </li>
         </ul>
       </div>
@@ -39,5 +39,9 @@
           </li>
         </ul>
       </div>
+      <p *ngIf="!!message" [ngClass]="{'error-message': isMessageError, 'success-message': !isMessageError}"
+        class="notification">
+        {{message}}
+      </p>
     </div>
   </header>

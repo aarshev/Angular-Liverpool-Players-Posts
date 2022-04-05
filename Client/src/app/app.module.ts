@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { PostsModule } from './features/posts/posts.module';
 import { AuthModule } from './auth/auth.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { UserService } from './core/user.service';
 @NgModule({
   declarations: [
     AppComponent
@@ -24,11 +25,19 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     PagesModule,
     PlayersModule,
-    PostsModule,
-    AuthModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (userService: UserService) => {
+        return () => userService.authenticate();
+      },
+      deps: [UserService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,6 +14,14 @@ const routes: Routes = [
     component: HomePageComponent
 },
 {
+    path: 'user',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) //lazy loading
+},
+{
+    path: 'posts',
+    loadChildren: () => import('./features/posts/posts.module').then(m => m.PostsModule) //lazy loading
+},
+{
     path: '**',
     component: PageNotFoundComponent
 }

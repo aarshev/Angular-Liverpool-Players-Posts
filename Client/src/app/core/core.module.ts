@@ -4,6 +4,9 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { PlayerService } from './player.service';
+import { UserService } from './user.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorHandlerInterceptor } from './error-handler.interceptor';
 
 
 
@@ -26,7 +29,14 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        PlayerService
+        PlayerService,
+        UserService,
+        PlayerService,
+        {
+          provide: HTTP_INTERCEPTORS,
+          multi: true,
+          useClass: ErrorHandlerInterceptor,
+        }
       ]
     }
   }

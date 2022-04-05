@@ -5,14 +5,28 @@
     <form  #newPostForm="ngForm" (ngSubmit)="submitNewPost(newPostForm)">
         <div class="new-theme-title">
             <label for="playerName">Player  <span class="red"></span></label>
-            <select #playerName="ngModel" ngModel name="playerName" id="playerName">
+            <select #playerName="ngModel" ngModel name="playerName" id="playerName" required>
                 <option value="" disabled selected>Select a player</option>
                 <option *ngFor="let player of playerListNames" value="{{player.value}}">{{player.value}}</option>
             </select>
         </div>
+        <ng-container *ngIf="playerName.touched && playerName.invalid">
+            <p *ngIf="playerName.errors?.['required']" class="error">
+                Player name is required.
+            </p>
+        </ng-container>
         <div class="new-theme-content">
-            <label for="postContent">Post <span class="red"></span></label>
-            <textarea #postText="ngModel" ngModel type="text" name="postContent" id="postContent" rows="8" class="height"></textarea>
+            <label for="postText">Post <span class="red"></span></label>
+            <textarea #postText="ngModel" ngModel type="text" name="postText" id="postText" rows="8" class="height" required minlength="5"></textarea>
+        
+            <ng-container *ngIf="postText.touched && postText.invalid">
+                <p *ngIf="postText.errors?.['required']" class="error">
+                    Post content is required.
+                </p>
+                <p *ngIf="postText.errors?.['minlength']" class="error">
+                    Post content must be at least 5 characters long.
+                </p>
+            </ng-container>
         </div>
         <div class="new-theme-buttons">
             <button [disabled]="newPostForm.invalid" class="public">Post</button>

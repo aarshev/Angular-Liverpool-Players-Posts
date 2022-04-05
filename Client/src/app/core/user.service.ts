@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { EMPTY, Observable } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IUser } from './interfaces';
 
@@ -41,5 +41,13 @@ export class UserService {
     return this.httpClient
       .post<IUser>(`${environment.apiUrl}/logout`, {}, { withCredentials: true })
       .pipe(tap((user) => this.currentUser = user))
+  }
+
+  authenticate(): Observable<IUser> {
+    return this.httpClient
+      .get<IUser>(`${environment.apiUrl}/profile`, { withCredentials: true })
+      .pipe(tap(user => {this.currentUser = user;}), catchError((err) => {
+        return EMPTY;
+      }))
   }
 }
