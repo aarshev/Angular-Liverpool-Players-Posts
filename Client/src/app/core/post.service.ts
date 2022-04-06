@@ -29,6 +29,10 @@ export class PostService {
     return this.http.get<IPost>(`${apiURL}/edit/${id}`);
   }
 
+  updatePost(id:string, body: { playerName: string, postText: string }): Observable<IPost> {
+    return this.http.post<IPost>(`${apiURL}/edit/${id}`, body, { withCredentials: true });
+  }
+
   deletePostById(id: string): Observable<void>{
     return this.http.delete<void>(`${apiURL}/delete/${id}`);
   }

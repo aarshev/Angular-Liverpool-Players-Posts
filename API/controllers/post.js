@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { getAllPosts, createPost, getPostById, getAllPostsForPlayer, updatePost, deletePost } = require('../services/post');
-const { auth } = require('../utils');
+const utils = require('../utils');
 
 
 const router = Router();
@@ -26,14 +26,13 @@ router.get('/posts/:id', async (req, res, next) => {
 });
 
 
-router.post('/create', auth() , async (req, res, next) => {
+router.post('/create', utils.auth() , async (req, res, next) => {
    const { _id: userId } = req.user; //todo get id after you make the jwt
     const post = {
         playerName : req.body.playerName
         , postContent  : req.body.postContent
         , author  : userId
     }
-    console.log(post);
     try{
         const postDone = await createPost(post);
         res.status(200).json(postDone);
@@ -51,7 +50,7 @@ router.get('/edit/:id', async (req, res, next) => {
         next(err);
     }
 });
-//todo add guards to delete update and create
+
 router.post('/edit/:id' , async (req, res, next) => {
     const id = req.params.id;
     const existing = await getPostById(id);
@@ -60,7 +59,6 @@ router.post('/edit/:id' , async (req, res, next) => {
         playerName : req.body.playerName
         , postContent  : req.body.postContent
     }
-    
     try{
         const updatedPost = await updatePost(id, post);
         res.status(200).json(updatedPost);
