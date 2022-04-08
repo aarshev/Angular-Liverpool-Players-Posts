@@ -7,6 +7,7 @@ import { PostListComponent } from './post-list/post-list.component';
 import { PostListItemComponent } from './post-list-item/post-list-item.component';
 import { PlayerPostListComponent } from './player-post-list/player-post-list.component';
 import { UpdatePostComponent } from './update-post/update-post.component';
+import { UserPostsComponent } from './user-posts/user-posts.component';
 
 
 
@@ -16,7 +17,8 @@ import { UpdatePostComponent } from './update-post/update-post.component';
     PostListComponent,
     PostListItemComponent,
     PlayerPostListComponent,
-    UpdatePostComponent
+    UpdatePostComponent,
+    UserPostsComponent
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,20 @@
 const { Router } = require('express');
-const { getAllPosts, createPost, getPostById, getAllPostsForPlayer, updatePost, deletePost } = require('../services/post');
+const { getAllPosts, createPost, getPostById, getAllPostsForPlayer, updatePost, deletePost, getAllPostsForUser } = require('../services/post');
 const utils = require('../utils');
 
 
 const router = Router();
+
+router.get('/profile/:id', async (req, res, next) => {
+    const userId = req.params.id
+    const posts = await getAllPostsForUser(userId);
+    try{
+        res.status(200).json(posts)
+    }catch(err){
+        next(err);
+    }
+});
+
 
 router.get('/posts', async (req, res, next) => {
     const posts = await getAllPosts();
@@ -17,7 +28,6 @@ router.get('/posts', async (req, res, next) => {
 router.get('/posts/:id', async (req, res, next) => {
     const playerId = req.params.id
     const posts = await getAllPostsForPlayer(playerId);
-    console.log(posts)
     try{
         res.status(200).json(posts)
     }catch(err){
@@ -27,10 +37,10 @@ router.get('/posts/:id', async (req, res, next) => {
 
 
 router.post('/create', utils.auth() , async (req, res, next) => {
-   const { _id: userId } = req.user; //todo get id after you make the jwt
+   const { _id: userId } = req.user;
     const post = {
         playerName : req.body.playerName
-        , postContent  : req.body.postContent
+        , postContent  : req.body.postText
         , author  : userId
     }
     try{

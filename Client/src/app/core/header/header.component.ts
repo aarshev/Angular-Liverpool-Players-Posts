@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
 
 
   get currentUser(): IUser {
+    
     return this.userService.currentUser;
   }
 
@@ -34,6 +35,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.messageBus.onNewMessage$.subscribe(newMessage => {
       console.log('onNewMessage$.subscribe', newMessage);
+      console.log(this.userService.currentUser)
       this.message = newMessage?.text || '';
       this.isMessageError = newMessage?.type === MessageType.Error;
 

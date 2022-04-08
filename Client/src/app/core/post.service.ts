@@ -25,6 +25,10 @@ export class PostService {
     return this.http.get<IPost[]>(`${apiURL}/posts/${id}`);
   }
 
+  loadPostForUser(id: string): Observable<IPost[]> {
+    return this.http.get<IPost[]>(`${apiURL}/profile/${id}`);
+  }
+
   loadPostById(id: string): Observable<IPost> {
     return this.http.get<IPost>(`${apiURL}/edit/${id}`);
   }
