@@ -25,7 +25,7 @@ export class CreatePostComponent implements OnInit {
     this.postService.addPost$(newPostForm.value).subscribe({
       next: (post) => {
         console.log(post);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/posts']);
       },
       error: (error) => {
         //console.error(error);

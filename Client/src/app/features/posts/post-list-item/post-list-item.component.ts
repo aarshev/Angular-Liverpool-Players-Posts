@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPost, IUser } from 'src/app/core/interfaces';
 import { PostService } from 'src/app/core/post.service';
 import { UserService } from 'src/app/core/user.service';
+
 
 @Component({
   selector: 'app-post-list-item',
@@ -16,9 +17,19 @@ export class PostListItemComponent implements OnInit {
 
 
   userID: string = '';
+  canSubscribe: boolean = false;
+  likes!: number;
 
+  get isLogged(): boolean {
+    return this.userService.isLogged;
+  }
 
-  constructor(private postService: PostService,private router: Router, private userService: UserService) { }
+  get currentUser(): string {
+    
+    return this.userService.currentUser._id;
+  }
+
+  constructor(private postService: PostService,private router: Router, private userService: UserService, private ref:ChangeDetectorRef) { }
 
 
   ngOnInit(): void {
@@ -39,7 +50,19 @@ export class PostListItemComponent implements OnInit {
           }
         });
     }
+  }
 
+  likePost(postID:string): void{
+    //console.log(this.userID)
+    this.postService.likePost(postID, this.userID).subscribe(postList => {
+      this.canSubscribe = !postList.likes.includes(this.currentUser);
+      this.likes = postList.likes.length
+    })
+  }
+
+  ngOnChanges(): void {
+    this.canSubscribe = !this.post.likes.includes(this.currentUser);
+    this.likes = this.post.likes.length
   }
 
 }

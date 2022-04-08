@@ -54,6 +54,7 @@
     display: flex;
     justify-content: right;
     margin-top: 0.7rem;
+    min-height: 60px;
   }
   
   .subscribers {
@@ -71,11 +72,11 @@
   }
   
   .subscribe {
-    background-color: green;
+    background-color: green;cursor: pointer;
   }
   
   .unsubscribe {
-    background-color: red;
+    background-color: skyblue;cursor: pointer;
   }
   
   time {

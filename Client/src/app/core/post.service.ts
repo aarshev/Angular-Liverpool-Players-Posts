@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -12,6 +12,7 @@ const apiURL = environment.apiUrl;
 export class PostService {
 
   constructor(private http: HttpClient) { }
+  
 
   addPost$(body: { playerName: string, postText: string }): Observable<IPost> {
     return this.http.post<IPost>(`${apiURL}/create`, body, { withCredentials: true });
@@ -27,6 +28,10 @@ export class PostService {
 
   loadPostForUser(id: string): Observable<IPost[]> {
     return this.http.get<IPost[]>(`${apiURL}/profile/${id}`);
+  }
+
+  likePost(id:string, userID : string): Observable<IPost>{
+    return this.http.post<IPost>(`${apiURL}/like/${id}`,{params: {'userID': userID}} ,{ withCredentials: true });
   }
 
   loadPostById(id: string): Observable<IPost> {

@@ -63,6 +63,13 @@ async function deletePost(id){
     return Post.findByIdAndDelete(id);
 }
 
+async function likePost(postId, userId){
+    const post = await getPostById(postId);
+    post.likes.push(userId);
+
+    await post.save();
+    return post;
+}
 
 
 
@@ -73,5 +80,6 @@ module.exports = {
     updatePost,
     deletePost,
     getAllPostsForPlayer,
-    getAllPostsForUser
+    getAllPostsForUser,
+    likePost
 }

@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getAllPosts, createPost, getPostById, getAllPostsForPlayer, updatePost, deletePost, getAllPostsForUser } = require('../services/post');
+const { getAllPosts, createPost, getPostById, getAllPostsForPlayer, updatePost, deletePost, getAllPostsForUser, likePost } = require('../services/post');
 const utils = require('../utils');
 
 
@@ -37,6 +37,7 @@ router.get('/posts/:id', async (req, res, next) => {
 
 
 router.post('/create', utils.auth() , async (req, res, next) => {
+    console.log(req.user)
    const { _id: userId } = req.user;
     const post = {
         playerName : req.body.playerName
@@ -83,6 +84,17 @@ router.delete('/delete/:id', async(req, res, next) => {
     try{
         const deletedPost = await deletePost(id);
         res.status(200).json(deletedPost);
+    }catch(err){
+       next(err)
+    }
+});
+
+router.post('/like/:id', utils.auth(), async(req, res, next) => {
+    const id= req.params.id;
+    const userId = req.user._id
+    try{
+        const likedPost = await likePost(id, userId);
+        res.status(200).json(likedPost);
     }catch(err){
        next(err)
     }

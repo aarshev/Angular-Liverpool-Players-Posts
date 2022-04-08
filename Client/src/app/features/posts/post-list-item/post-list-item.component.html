@@ -3,6 +3,7 @@
       <div class="theme-name">
         <h2>{{post.postContent}}</h2>
         <div class="columns">
+          <p style="margin-top: 39px; margin-right: 248px;position: absolute;">Likes: <span>{{likes}}</span></p>
           <div class="buttons" *ngIf="userID == post.author">
             <a class="edit" [routerLink]="['/posts/update', post._id]">
               <i class="fas fa-sign-in-alt"></i>
@@ -11,6 +12,11 @@
             <a class="delete" (click)="deleteHandler(post._id)">
               <i class="fas fa-sign-in-alt"></i>
               Delete
+            </a>
+          </div>
+          <div class="buttons">
+            <a *ngIf="isLogged && userID != post.author" [class.subscribe]="canSubscribe" [class.unsubscribe]="!canSubscribe" (click)="likePost(post._id)">
+              {{ canSubscribe ? 'Like' : 'Liked' }}
             </a>
           </div>
           <div>

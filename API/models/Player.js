@@ -7,7 +7,6 @@ const playerSchema = new Schema({
     , shirtNumber  : { type: Number, required:true }
     , position  : { type: String, required: true, enum: ['Goalkeeper', 'Defender', 'Midfielder', 'Attacker'] }
     , playerImage  :{ type: String}
-    , votes : { type: [ObjectId], ref: 'User', default: [] }
     , posts : { type: [ObjectId], ref: 'Post', default: []}
 });
 
