@@ -75,3 +75,15 @@
     display: inline-block;
     margin-top: 85px;
 }
+
+.team-player-list-item .img-wrap {
+    float: left;
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.team-player-list-item .img-wrap img {
+    display: block;
+    max-height: 200px;
+    max-width: 100%;
+}

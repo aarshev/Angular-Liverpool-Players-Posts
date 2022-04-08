@@ -6,13 +6,7 @@ const playerSchema = new Schema({
     playerName : { type: String, minlength: [4, 'Player Name must be at least 4 characters long']}
     , shirtNumber  : { type: Number, required:true }
     , position  : { type: String, required: true, enum: ['Goalkeeper', 'Defender', 'Midfielder', 'Attacker'] }
-    , playerImage  :
-        { type: String, validate: {
-            validator(value){
-                return URL_PATTERN.test(value);
-            }, message: 'Image must be a valid URL'
-        }
-    }
+    , playerImage  :{ type: String}
     , votes : { type: [ObjectId], ref: 'User', default: [] }
     , posts : { type: [ObjectId], ref: 'Post', default: []}
 });
