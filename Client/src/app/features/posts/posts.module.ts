@@ -8,6 +8,7 @@ import { PostListItemComponent } from './post-list-item/post-list-item.component
 import { PlayerPostListComponent } from './player-post-list/player-post-list.component';
 import { UpdatePostComponent } from './update-post/update-post.component';
 import { UserPostsComponent } from './user-posts/user-posts.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 

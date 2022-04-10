@@ -9,9 +9,7 @@ import { CoreModule } from './core/core.module';
 import { PagesModule } from './features/pages/pages.module';
 import { PlayersModule } from './features/players/players.module';
 import { AppRoutingModule } from './app-routing.module';
-import { PostsModule } from './features/posts/posts.module';
-import { AuthModule } from './auth/auth.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './core/user.service';
 @NgModule({
   declarations: [
@@ -26,7 +24,7 @@ import { UserService } from './core/user.service';
     PagesModule,
     PlayersModule,
     NoopAnimationsModule,
-    
+    BrowserAnimationsModule
   ],
   providers: [
     {

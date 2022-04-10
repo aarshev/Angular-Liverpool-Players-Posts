@@ -1,6 +1,7 @@
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IPost, IUser } from 'src/app/core/interfaces';
+import { IPost } from 'src/app/core/interfaces';
 import { PostService } from 'src/app/core/post.service';
 import { UserService } from 'src/app/core/user.service';
 
@@ -8,7 +9,17 @@ import { UserService } from 'src/app/core/user.service';
 @Component({
   selector: 'app-post-list-item',
   templateUrl: './post-list-item.component.html',
-  styleUrls: ['./post-list-item.component.css']
+  styleUrls: ['./post-list-item.component.css'],
+  animations: [
+    trigger('fadeAnimation', [
+    transition(':enter', [
+      style({ opacity: 0 }), animate('500ms', style({ opacity: 1 }))]
+    ),
+    transition(':leave',
+      [style({ opacity: 1 }), animate('300ms', style({ opacity: 0 }))]
+    )
+  ])
+  ]
 })
 export class PostListItemComponent implements OnInit {
 
@@ -25,8 +36,10 @@ export class PostListItemComponent implements OnInit {
   }
 
   get currentUser(): string {
-    
-    return this.userService.currentUser._id;
+    if(this.userService.currentUser){
+      return this.userService.currentUser._id
+    }
+    return ''
   }
 
   constructor(private postService: PostService,private router: Router, private userService: UserService, private ref:ChangeDetectorRef) { }
@@ -59,7 +72,7 @@ export class PostListItemComponent implements OnInit {
       this.likes = postList.likes.length
     })
   }
-
+//update delete functionality TODO
   ngOnChanges(): void {
     this.canSubscribe = !this.post.likes.includes(this.currentUser);
     this.likes = this.post.likes.length

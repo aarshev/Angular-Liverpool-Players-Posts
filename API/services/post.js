@@ -4,7 +4,7 @@ const Player = require('../models/Player');
 
 
 async function getAllPosts(){
-    return Post.find({});
+    return await Post.find({}).sort({"created_at": -1});
 }
 
 async function getPostById(id){
@@ -60,7 +60,19 @@ async function updatePost(id, post){
 }
 
 async function deletePost(id){
-    return Post.findByIdAndDelete(id);
+    const post = await getPostById(id);
+    const playerName = post.playerName;
+
+    const player = await Player.findOne({playerName: playerName});
+    for(let i = 0; i < player.posts.length; i++){
+        if(player.posts[i] == id){
+            player.posts.splice(i, 1);
+            await player.save();
+            break;
+        }
+    }
+
+   return Post.findByIdAndDelete(id);
 }
 
 async function likePost(postId, userId){

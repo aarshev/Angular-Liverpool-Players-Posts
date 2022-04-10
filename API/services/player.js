@@ -4,7 +4,7 @@ const Player = require('../models/Player');
 
 
 async function getAllPlayers(){
-    return Player.find({});
+    return await Player.find({});
 }
 
 
