@@ -57,7 +57,7 @@ export class PostListItemComponent implements OnInit {
           next: args => {
           },
           complete: () => {
-            this.router.navigate(['/home']);
+            location.reload()
           },
           error: () => {
           }
