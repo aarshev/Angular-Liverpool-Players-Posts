@@ -49,3 +49,9 @@
 .welcome li {
     list-style: none;
 }
+
+.gifLogo{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
