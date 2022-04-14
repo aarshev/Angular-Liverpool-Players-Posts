@@ -73,7 +73,7 @@ This project was created by me as the Angular front-end framework course at Soft
     <li>All the REST API Endpoints are stored in the Word document in this repo - Liverpool Players Posts Documentation.docx</li>
 </ul>
 
-## How to start the project localy
+## How to start the project locally
 <ul>
     <li>Install all dependencies from both API and Client with the command npm i</li>
     <li>Navigate to the API folder in the command line and start the server with the npm run start</li>
