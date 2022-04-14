@@ -54,12 +54,6 @@ This project was created by me as the Angular front-end framework course at Soft
     <li>Load animation is provided for the posts </li>
 </ul>
 
-## My posts Page
-<ul>
-    <li> The my post page includes all the posts that the user has made. </li>
-
-</ul>
-
 
 ## Technology Stack 
 <ul>
