@@ -60,7 +60,6 @@ This project was created by me as the Angular front-end framework course at Soft
 
 </ul>
 
-#### Users can also change their profile pictures from their profile page. In addition to that, users can follow each other through their profile pages.
 
 ## Technology Stack 
 <ul>
