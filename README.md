@@ -54,20 +54,13 @@ This project was created by me as the Angular front-end framework course at Soft
     <li>Load animation is provided for the posts </li>
 </ul>
 
-## My posts Page
-<ul>
-    <li> The my post page includes all the posts that the user has made. </li>
-
-</ul>
-
-#### Users can also change their profile pictures from their profile page. In addition to that, users can follow each other through their profile pages.
 
 ## Technology Stack 
 <ul>
     <li>Bootstrap (NgBootstrap)</li>
     <li>Angular 13</li>
     <li>JavaScript</li>
-    <li>HTML, CSS, SCSS</li>
+    <li>HTML, CSS</li>
     <li>ExpressJS, NodeJS</li>
     <li>TypeScript</li>
     <li>MongoDB, Mongoose</li>
@@ -78,4 +71,12 @@ This project was created by me as the Angular front-end framework course at Soft
 ## REST API End points
 <ul>
     <li>All the REST API Endpoints are stored in the Word document in this repo - Liverpool Players Posts Documentation.docx</li>
+</ul>
+
+## How to start the project locally
+<ul>
+    <li>Install all dependencies from both API and Client with the command npm i</li>
+    <li>Navigate to the API folder in the command line and start the server with the npm run start</li>
+    <li>Navigate to the Client folder in the command line and start the app with ng serve. This will start the app on localhost:4200</li>
+    <li>Finally insert into to the player section in the datatbase the json playersDB.json</li>
 </ul>
