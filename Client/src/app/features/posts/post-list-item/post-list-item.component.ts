@@ -57,12 +57,13 @@ export class PostListItemComponent implements OnInit {
           next: args => {
           },
           complete: () => {
-            console.log(this.router.url)
-            if(this.router.url == '/posts'){
-              this.router.navigate(['/posts/profile/' + this.userID]);
-            }else{
-              this.router.navigate(['/posts']);
-            }
+            // console.log(this.router.url)
+            // if(this.router.url == '/posts'){
+            //   this.router.navigate(['/posts/profile/' + this.userID]);
+            // }else{
+            //   this.router.navigate(['/posts']);
+            // }
+            this.router.navigate(['/posts/deletedDummy']);
           },
           error: () => {
           }

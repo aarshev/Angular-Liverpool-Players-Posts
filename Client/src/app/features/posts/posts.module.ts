@@ -9,6 +9,7 @@ import { PlayerPostListComponent } from './player-post-list/player-post-list.com
 import { UpdatePostComponent } from './update-post/update-post.component';
 import { UserPostsComponent } from './user-posts/user-posts.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DeleteDummyComponent } from './delete-dummy/delete-dummy.component';
 
 
 
@@ -19,7 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PostListItemComponent,
     PlayerPostListComponent,
     UpdatePostComponent,
-    UserPostsComponent
+    UserPostsComponent,
+    DeleteDummyComponent
   ],
   imports: [
     CommonModule,
