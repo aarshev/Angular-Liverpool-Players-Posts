@@ -15,7 +15,7 @@ export class UpdatePostComponent implements OnInit {
   postList!: IPost;
 
   editProfileForm: FormGroup = this.formBuilder.group({
-    playerName: new FormControl(''),
+    playerName: new FormControl('', [Validators.required]),
     postContent: new FormControl('',[Validators.required, Validators.minLength(5)])
   });
 
